@@ -32,6 +32,7 @@ class PGP:
     @staticmethod
     def decrypt(data):
         private_key, _ = pgpy.PGPKey.from_file("private.txt")
+        # with private_key.unlock(""):   --> if passphrase
         decrypted_data = private_key.decrypt(pgpy.PGPMessage.from_blob(data))
         return bytes(decrypted_data._message.contents) if isinstance(decrypted_data._message.contents,
                                                                      bytearray) else decrypted_data._message.contents
